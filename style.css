@@ -169,3 +169,11 @@ body {
 .overlay p {
   font-size: calc(20px * var(--scale-factor));
 }
+.version-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: calc(12px * var(--scale-factor));
+  font-weight: 700;
+  color: #94a3b8; /* subtle slate-gray */
+  margin-right: calc(8px * var(--scale-factor));
+}
