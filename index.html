@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <title>Siege Defense - Refactored</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="game-container">
+    <!-- TOP HUD -->
+    <div class="hud">
+      <div class="meters">
+        <span class="badge" id="gold-badge">💰 200</span>
+        <span class="badge" id="hp-badge">❤️ 500</span>
+        <span class="badge" id="wave-badge">🌊 1</span>
+      </div>
+      <div class="hud-buttons">
+        <button class="icon-button">⏸️</button>
+        <button class="icon-button">⚙️</button>
+      </div>
+    </div>
+
+    <!-- BATTLEFIELD -->
+    <div class="board">
+      <canvas id="game-canvas"></canvas>
+      <div class="overlay" id="game-over-overlay">
+        <h2>Game Over</h2>
+        <p>Your castle has fallen!</p>
+      </div>
+    </div>
+
+    <!-- BOTTOM CONTROLS -->
+    <div class="controls">
+      <button class="action-button" id="build-unit-btn">Build Unit</button>
+      <button class="action-button primary" id="start-wave-btn">Start Wave ▶</button>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
