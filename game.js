@@ -448,8 +448,9 @@ function draw() {
         ctx.strokeStyle = state.ghost.valid ? 'white' : 'red';
         ctx.lineWidth = 2;
         ctx.stroke();
+	}
 		
-		    const def = UNIT_DEFS[state.placing];
+	const def = UNIT_DEFS[state.placing];
     if (def && def.range) {
         ctx.beginPath();
         ctx.arc(state.ghost.x, state.ghost.y, def.range, 0, Math.PI * 2);
