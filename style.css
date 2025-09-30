@@ -172,7 +172,7 @@ body {
 .version-badge {
   display: inline-flex;
   align-items: center;
-  font-size: calc(6px * var(--scale-factor));
+  font-size: calc(8px * var(--scale-factor));
   font-weight: 700;
   color: #04a3b8; 
   margin-right: calc(8px * var(--scale-factor));
