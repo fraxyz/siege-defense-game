@@ -448,6 +448,17 @@ function draw() {
         ctx.strokeStyle = state.ghost.valid ? 'white' : 'red';
         ctx.lineWidth = 2;
         ctx.stroke();
+		
+		    const def = UNIT_DEFS[state.placing];
+    if (def && def.range) {
+        ctx.beginPath();
+        ctx.arc(state.ghost.x, state.ghost.y, def.range, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(255,255,255,0.2)'; // faint white
+        ctx.lineWidth = 1;
+        ctx.setLineDash([6, 6]); // dashed for clarity
+        ctx.stroke();
+        ctx.setLineDash([]); // reset dash
+		
     }
 }
 
