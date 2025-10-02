@@ -11,31 +11,50 @@
   <div id="game-container">
     <!-- TOP HUD -->
     <div class="hud">
-	<span class="version-badge">v0.2</span>
-      <div class="meters">
-        <span class="badge" id="gold-badge">💰 200</span>
-        <span class="badge" id="hp-badge">❤️ 500</span>
-        <span class="badge" id="wave-badge">🌊 1</span>
+      <div class="hud-row top-row">
+        <span class="badge gold" id="gold-badge">💰 200</span>
+        <span class="badge xp" id="xp-badge">✨ 0 XP</span> <!-- New: Player XP -->
+        <span class="badge level" id="level-badge">⭐ Lvl 1</span> <!-- New: Player Level -->
+        <div class="hud-buttons">
+          <button class="icon-button">⏸️</button>
+          <button class="icon-button">⚙️</button>
+        </div>
       </div>
-      <div class="hud-buttons">
-        <button class="icon-button">⏸️</button>
-        <button class="icon-button">⚙️</button>
+      <div class="hud-row bottom-row">
+        <div class="castle-hp-bar-container"> <!-- New: Castle HP Bar Container -->
+          <div class="castle-hp-bar" id="castle-hp-bar"></div>
+        </div>
+        <div class="wave-progress-container"> <!-- New: Wave Progress Container -->
+            <div class="wave-progress-bar" id="wave-progress-bar"></div>
+            <span class="wave-number-overlay" id="wave-number-overlay">🌊 1</span>
+        </div>
       </div>
     </div>
 
     <!-- BATTLEFIELD -->
     <div class="board">
       <canvas id="game-canvas"></canvas>
-      <div class="overlay" id="game-over-overlay">
-        <h2>Game Over</h2>
-        <p>Your castle has fallen!</p>
-      </div>
     </div>
 
     <!-- BOTTOM CONTROLS -->
     <div class="controls">
-      <button class="action-button" id="build-unit-btn">Build Unit</button>
-      <button class="action-button primary" id="start-wave-btn">Start Wave ▶</button>
+      <div class="selected-unit-container">
+        <button class="icon-button" id="place-unit-btn">+</button>
+        <div id="selected-unit-icon"></div>
+      </div>
+      <button class="icon-button" id="start-wave-btn">▶</button>
+    </div>
+
+    <!-- PLACE UNIT POPUP -->
+    <div class="popup" id="place-unit-popup">
+      <div class="popup-content">
+        <h2>Place a Unit</h2>
+        <div class="unit-selection">
+          <button class="unit-button" data-unit="archer">
+            <span>Archer</span>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 

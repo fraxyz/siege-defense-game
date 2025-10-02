@@ -39,13 +39,12 @@ class Combatant extends Entity {
         super(x, y);
         this.maxHp = maxHp;
         this.hp = maxHp;
-        this.xp = 0;
-        this.xpToNextLevel = 100;
     }
 
     drawStatusBar(ctx, current, max, color, yOffset) {
-        if (current <= 0 && max > 0 && color !== '#3b82f6') {
-            return;
+        const isHpBar = color !== '#3b82f6';
+        if (isHpBar && current >= max) {
+            return; // Don't draw HP bar if current HP is at max
         }
 
         const BAR_WIDTH = 30; 
@@ -161,7 +160,7 @@ class Enemy extends Combatant {
             this.attackCooldown = Math.max(0, this.attackCooldown - dt);
             if (this.attackCooldown === 0) {
                 state.hp = Math.max(0, state.hp - this.def.damage);
-                document.getElementById('hp-badge').textContent = `❤️ ${state.hp}`;
+                // The HUD update for HP is now handled in game-logic.js update loop
                 this.attackCooldown = 1 / this.def.attackRate;
             }
             return; 
@@ -171,11 +170,9 @@ class Enemy extends Combatant {
     }
 
     draw(ctx) {
-        // --- MODIFIED: Use a DYNAMIC key to find the correct sprite ---
         const spriteKey = this.def.name.toLowerCase();
         const sprite = spriteCache[spriteKey];
 
-        // If a pre-rendered sprite exists for this enemy type, draw it.
         if (sprite) {
             const bobSpeed = 10;
             const bobAmount = 2;
@@ -186,16 +183,11 @@ class Enemy extends Combatant {
 
             ctx.drawImage(sprite, drawX, drawY);
         } else {
-            // Fallback for any enemy that hasn't been pre-rendered.
-            // In a real game, you would have the manual drawing logic here.
-            // For now, we'll just draw a placeholder so it's not invisible.
             ctx.fillStyle = 'magenta';
             ctx.fillRect(this.x - this.def.size / 2, this.y - this.def.size / 2, this.def.size, this.def.size);
             console.warn(`Sprite not found for: ${spriteKey}. Drawing placeholder.`);
         }
-        // -----------------------------------------------------------------
 		
-		// Draw the enemy health bar (this remains unchanged)
 		this.drawStatusBar(ctx, this.hp, this.maxHp, '#ef4444', -this.def.size * 0.8);
     }
 }
@@ -215,9 +207,6 @@ class Unit extends Combatant {
         
         const hpBarYOffset = -unitHeight * 0.8;
         this.drawStatusBar(ctx, this.hp, this.maxHp, '#34d399', hpBarYOffset);
-
-        const xpBarYOffset = hpBarYOffset + 4 + 1; 
-        this.drawStatusBar(ctx, this.xp, this.xpToNextLevel, '#3b82f6', xpBarYOffset); 
     }
 }
 
@@ -251,22 +240,21 @@ class Archer extends Unit {
     }
 
     draw(ctx) {
-        const baseX = this.x; const baseY = this.y; const scale = 1.5; 
-		
-        const faceRadius = 8 * scale; const faceY = baseY - faceRadius - (2 * scale);
-        ctx.fillStyle = '#f59e0b'; ctx.strokeStyle = '#b45309'; ctx.lineWidth = 2 * scale;
-        ctx.beginPath(); ctx.arc(baseX, faceY, faceRadius, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
-        const hatTipX = baseX + (2 * scale); const hatTipY = faceY - (22 * scale);
-        const hatBaseY = faceY - (faceRadius / 2); const hatLeftX = baseX - (14 * scale);
-        const hatRightX = baseX + (10 * scale);
-        ctx.fillStyle = '#166534'; ctx.strokeStyle = '#14532d'; ctx.lineWidth = 2 * scale;
-        ctx.beginPath(); ctx.moveTo(hatTipX, hatTipY); ctx.lineTo(hatRightX, hatBaseY);
-        ctx.lineTo(hatLeftX, hatBaseY); ctx.closePath(); ctx.fill(); ctx.stroke();
-        ctx.strokeStyle = '#ef4444'; ctx.lineWidth = 2.5 * scale; ctx.beginPath();
-        const featherStartX = hatLeftX + (4 * scale); const featherStartY = hatBaseY - (1 * scale);
-        ctx.moveTo(featherStartX, featherStartY); ctx.lineTo(featherStartX - (5 * scale), featherStartY - (10 * scale)); ctx.stroke();
-        
-		this.drawStatusBars(ctx, scale);
+        const spriteKey = this.def.name.toLowerCase();
+        const sprite = spriteCache[spriteKey];
+
+        if (sprite) {
+            const drawX = this.x - sprite.width / 2;
+            const drawY = this.y - sprite.height / 2;
+
+            ctx.drawImage(sprite, drawX, drawY);
+        } else {
+            ctx.fillStyle = 'magenta';
+            ctx.fillRect(this.x - 20, this.y - 20, 40, 40);
+            console.warn(`Sprite not found for: ${spriteKey}. Drawing placeholder.`);
+        }
+
+        this.drawStatusBars(ctx, 1.5);
     }
 }
 

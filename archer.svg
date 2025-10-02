@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" xmlns:bx="https://boxy-svg.com">
+  <ellipse style="fill: rgb(212, 143, 92); stroke: rgb(195, 113, 53); stroke-width: 12px;" cx="236.65" cy="268.048" rx="72.618" ry="93.123"/>
+  <ellipse style="stroke: rgb(0, 0, 0); fill: rgb(6, 6, 6);" cx="215.72" cy="265.057" rx="7.262" ry="9.825"/>
+  <ellipse style="stroke: rgb(0, 0, 0); fill: rgb(6, 6, 6);" cx="255.875" cy="266.766" rx="7.262" ry="9.825"/>
+  <path d="M 145.485 83.953 Q 146.267 80.491 151.69 83.953 L 334.525 200.678 Q 339.948 204.14 333.743 204.14 L 124.55 204.14 Q 118.345 204.14 119.127 200.678 Z" bx:shape="triangle 118.345 80.491 221.603 123.649 0.126 0.028 1@65ab95af" style="fill: rgb(28, 86, 22); stroke-width: 12px; stroke: rgb(18, 58, 14); transform-box: fill-box; transform-origin: 81.1828% 41.5526%;" transform="matrix(0.996613, 0.082239, -0.052637, 0.999055, 25.713055, 45.162583)"/>
+  <ellipse style="fill: rgb(164, 14, 14); stroke-width: 7px; stroke: rgb(119, 20, 20); transform-box: fill-box; transform-origin: 56.6667% 69.9999%;" cx="167.45" cy="127.509" rx="12.815" ry="66.211" transform="matrix(0.91645, -0.400149, 0.400149, 0.91645, -3.417427, 26.484329)"/>
+  <ellipse style="stroke: rgb(0, 0, 0); fill: rgb(52, 21, 5); transform-box: fill-box; transform-origin: 50% 50%;" cx="211.875" cy="299.23" rx="23.067" ry="5.553" transform="matrix(0.965926, -0.258819, 0.258819, 0.965926, -0.854252, 0.854431)"/>
+  <ellipse style="stroke: rgb(0, 0, 0); fill: rgb(52, 21, 5); transform-box: fill-box; transform-origin: 50% 50%;" cx="264.844" cy="299.23" rx="25.63" ry="5.553" transform="matrix(0.965926, 0.258819, -0.258819, 0.965926, 0.000111, 1.708765)"/>
+</svg>

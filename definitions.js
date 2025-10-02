@@ -117,26 +117,28 @@ const UNIT_DEFS = {
       projectile: {
           damage: 15,
           speed: 250,
-          size: 12,
-          color: '#4b5563',
+          size: 18,
+          color: '#3b3523',
           type: 'Arrow'
-      }
+      },
+      spriteUrl: './archer.svg',
+      spriteWidth: 500,
+      spriteHeight: 500,
     },
 };
 
 const ENEMY_DEFS = {
     grunt: {
         name: 'Grunt',
-        hp: 50,
+        hp: 50, // MODIFIED: Increased Grunt HP for longer waves
         speed: 50,
         size: 40, // Collision/logic size.
-        damage: 5,
+        damage: 10, // Doubled damage from 5 to 10
         attackRate: 0.5,
         goldValue: 10,
         spriteUrl: './grunt.svg',
-        // --- MODIFIED LINES ---
-        spriteWidth: 500,  // Updated to match new SVG's viewBox width
-        spriteHeight: 500, // Updated to match new SVG's viewBox height
+        spriteWidth: 500,
+        spriteHeight: 500,
     },
 };
 
@@ -152,7 +154,7 @@ function preRenderGrunt() {
             const offscreenCanvas = document.createElement('canvas');
 
             const aspectRatio = def.spriteWidth / def.spriteHeight;
-            const renderHeight = 90;
+            const renderHeight = 120;
             const renderWidth = renderHeight * aspectRatio;
 
             offscreenCanvas.width = renderWidth;
@@ -172,12 +174,43 @@ function preRenderGrunt() {
     });
 }
 
+function preRenderArcher() {
+    return new Promise((resolve, reject) => {
+        const def = UNIT_DEFS.archer;
+        const img = new Image();
+        img.src = def.spriteUrl;
+
+        img.onload = () => {
+            const offscreenCanvas = document.createElement('canvas');
+
+            const aspectRatio = def.spriteWidth / def.spriteHeight;
+            const renderHeight = 96;
+            const renderWidth = renderHeight * aspectRatio;
+
+            offscreenCanvas.width = renderWidth;
+            offscreenCanvas.height = renderHeight;
+            const ctx = offscreenCanvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, renderWidth, renderHeight);
+
+            spriteCache.archer = offscreenCanvas;
+            console.log('Archer SVG sprite pre-rendered.');
+            resolve();
+        };
+
+        img.onerror = (err) => {
+            console.error(`Failed to load sprite: ${def.spriteUrl}`);
+            reject(err);
+        };
+    });
+}
+
 
 // A manager function to handle all sprite pre-rendering
 // It now returns a Promise that resolves when all sprites are loaded.
 function preRenderAllSprites() {
     const promises = [
-        preRenderGrunt()
+        preRenderGrunt(),
+        preRenderArcher()
         // When we add new enemies, we'll add their pre-render promises here.
     ];
     return Promise.all(promises);
